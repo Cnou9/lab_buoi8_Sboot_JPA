@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register Page</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <!-- Additional stylesheets or custom styles can be added here -->
+</head>
+<body>
+
+<!-- Header Section -->
+<header class="bg-dark text-white text-center py-5">
+    <img src="https://motphimw.com/wp-content/uploads/2023/10/Motphimlogo.png" alt="Header Image" class="img-fluid">
+</header>
+
+<section class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header text-center bg-success text-white">
+                    Register
+                </div>
+                <div class="card-body">
+                    <form action="/register" method="post">
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="newUsername" class="form-label">Username</label>
+                            <input type="text" class="form-control" id="newUsername" name="newUsername" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="newPassword" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="newPassword" name="newPassword" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="confirmPassword" class="form-label">Confirm Password</label>
+                            <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
+                        </div>
+                        <button type="submit" class="btn btn-success">Register</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<footer class="bg-dark py-4 text-white">
+    <div class="container">
+        <div class="row">
+            <div class="col-4">
+                <img src="https://motphimw.com/wp-content/uploads/2023/10/Motphimlogo.png" alt="">
+                <p class="mt-2">Motphim - Trang xem phim trực tuyến miễn phí tại Vietnam.
+                    Tại đây các bạn có thể tìm kiếm những bộ phim mà mình yêu thích với hơn hàng nghìn bộ phim mới được
+                    cập nhật thường xuyên.
+                </p>
+            </div>
+            <div class="col-2">
+                <h5 class="text-uppercase mb-3">Danh Muc</h5>
+                <p>Phim chieu rap </p>
+                <p>Phim chieu rap </p>
+                <p>Phim Le </p>
+                <p>Phim bo </p>
+                <p>Phim TV show </p>
+
+            </div>
+            <div class="col-2">
+                <h5 class="text-uppercase mb-3">Qốc gia</h5>
+                <p>Phim chieu rap </p>
+                <p>Phim chieu rap </p>
+                <p>Phim Le </p>
+                <p>Phim bo </p>
+                <p>Phim TV show </p>
+
+            </div>
+            <div class="col-2">
+                <h5 class="text-uppercase mb-3">Thông tin</h5>
+                <p>Phim chieu rap </p>
+                <p>Phim chieu rap </p>
+                <p>Phim lẻ</p>
+                <p>Phim bo </p>
+                <p>Phim TV show </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- JavaScript and Bootstrap Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
+<script>
+    function validateRegistration() {
+        // Perform client-side validation (e.g., password match) if needed
+
+        // Check for uniqueness using AJAX (assumes you're using a server-side language like PHP)
+        var username = document.getElementById("newUsername").value;
+        var email = document.getElementById("email").value;
+
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                var response = JSON.parse(this.responseText);
+                if (response.usernameExists) {
+                    document.getElementById("usernameError").innerText = "Username is not unique.";
+                } else {
+                    document.getElementById("usernameError").innerText = "";
+                    document.getElementById("registerForm").submit(); // Submit the form if everything is valid
+                }
+            }
+        };
+        xhttp.open("GET", "/check-username-email?username=" + username + "&email=" + email, true);
+        xhttp.send();
+    }
+</script>
+</body>
+</html>
+
+
+

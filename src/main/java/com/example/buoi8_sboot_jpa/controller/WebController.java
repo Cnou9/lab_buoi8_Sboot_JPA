@@ -117,4 +117,14 @@ public class WebController {
             return "web/Blog-not-found"; // Điều hướng đến trang thông báo không tìm thấy nếu không có phim
         }
     }
+
+    @GetMapping("/login")
+    public String login() {
+        return "web/login";
+    }
+
+    @GetMapping("/register")
+    public String register() {
+        return "web/register";
+    }
 }

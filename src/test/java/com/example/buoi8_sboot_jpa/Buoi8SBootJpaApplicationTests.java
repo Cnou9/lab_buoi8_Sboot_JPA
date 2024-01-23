@@ -9,12 +9,15 @@ import com.github.slugify.Slugify;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.xml.crypto.Data;
 import java.util.*;
 
 @SpringBootTest
 class Buoi8SBootJpaApplicationTests {
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
     @Autowired
     private MovieRepository movieRepository;
 
@@ -151,7 +154,7 @@ class Buoi8SBootJpaApplicationTests {
             User user = User.builder()
                     .name(name)
                     .email(faker.internet().emailAddress())
-                    .password("123")
+                    .password(bCryptPasswordEncoder.encode("123"))
                     .avatar(generateLinkImage(name))
                     .role(i == 0 || i == 1 ? UserRole.ADMIN : UserRole.USER)
                     .build();
@@ -218,7 +221,7 @@ class Buoi8SBootJpaApplicationTests {
                         .rating(random.nextInt(10) + 1)
                         .createdAt(new Date())
                         .updatedAt(new Date())
-                        .movies(movie)
+                        .movie(movie)
                         .user(rdUser)
                         .build();
 
